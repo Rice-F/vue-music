@@ -43,6 +43,7 @@ export default {
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {
           this.recommends = res.data.slider
+          // this.recommends[2]['picUrl'] = 'http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/302179.jpg'
         }
       })
     }
