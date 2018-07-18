@@ -15,6 +15,7 @@ export default function jsonp (url, data, option) {
   })
 }
 
+// 拼接data
 // data有可能是多数对象，当传入2个及以上参数时需要用&连接，但第一个参数不需要&，因此return的时候要删掉&
 function param (data) {
   let params = ''

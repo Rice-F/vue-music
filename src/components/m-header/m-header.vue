@@ -14,14 +14,14 @@ export default {}
   @import '~common/stylus/mixin'
 
   .m-header
-    position relative
+    /*position relative*/
     height 44px
     text-align center
-    color $colo-theme
+    color $color-theme
     font-size 0
     .icon
       display inline-block
-      vertical-align top
+      /*vertical-align top*/
       margin-top 6px
       width 30px
       height 32px

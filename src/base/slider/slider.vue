@@ -32,10 +32,21 @@ export default {
       this._initDots()
       this._initSlider()
       if (this.autoPlay) {
-        console.log(1)
         this._play()
       }
     }, 20)
+    // 解决屏幕宽度改变时不适配的问题，监听resize事件重新计算宽度
+    window.addEventListener('resize', () => {
+      if (!this.slider) {
+        return
+      }
+      this._setSliderWidth(true)
+      this.slider.refresh()
+    })
+  },
+  // 当组件里有计时器，在组件销毁时要清掉计时器
+  destroyed() {
+    clearTimeout(this.timer)
   },
   data() {
     return {
@@ -59,7 +70,7 @@ export default {
   },
   // this.children返回一个dom集合(HTMLCollection)
   methods: {
-    _setSliderWidth() {
+    _setSliderWidth(isResize) {
       this.children = this.$refs.sliderGroup.children
       let width = 0
       let sliderWidth = this.$refs.slider.clientWidth
@@ -70,7 +81,7 @@ export default {
         width += sliderWidth
       }
       // 首尾克隆2个dom，因此宽度增加
-      if (this.loop) {
+      if (this.loop && !isResize) {
         width += 2 * sliderWidth
       }
       this.$refs.sliderGroup.style.width = width + 'px'
@@ -87,8 +98,7 @@ export default {
           loop: this.loop,
           threshold: 0.3,
           speed: 400
-        },
-        click: true
+        }
       })
       this.slider.on('scrollEnd', () => {
         let pageIndex = this.slider.getCurrentPage().pageX

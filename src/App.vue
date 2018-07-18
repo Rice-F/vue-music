@@ -2,7 +2,10 @@
   <div id="app">
     <m-header></m-header>
     <tab></tab>
-    <router-view></router-view>
+    <!--将router页面内容缓存至内存中，在页面跳转时，避免每次请求数据-->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

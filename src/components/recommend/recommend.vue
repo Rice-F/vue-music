@@ -23,12 +23,13 @@
 
 <script type="text/ecmascript-6">
 import Slider from 'base/slider/slider'
-import {getRecommend} from 'api/recommend'
+import {getRecommend, getDiscList} from 'api/recommend'
 import {ERR_OK} from 'api/config'
 
 export default {
   created() {
     this._getRecommend()
+    this._getDiscList()
   },
   data() {
     return {
@@ -44,6 +45,14 @@ export default {
         if (res.code === ERR_OK) {
           this.recommends = res.data.slider
           // this.recommends[2]['picUrl'] = 'http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/302179.jpg'
+        }
+      })
+    },
+    _getDiscList() {
+      getDiscList().then((res) => {
+        console.log(res)
+        if (res.code === ERR_OK) {
+          console.log(res.data.list)
         }
       })
     }
